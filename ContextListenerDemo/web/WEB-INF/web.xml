@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <listener>
+        <description>HttpSessionListener</description>
+        <listener-class>tientt.listener.SessionListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>ItemServlet</servlet-name>
+        <servlet-class>tientt.servlet.ItemServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ItemServlet</servlet-name>
+        <url-pattern>/ItemServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <context-param>
+        <param-name> DB_USER </param-name>
+        <param-value> sa </param-value>
+    </context-param>
+    <context-param>
+        <param-name> DB_PASSWORD </param-name>
+        <param-value> @rretiumm@rvel1011 </param-value>
+    </context-param>
+    <context-param>
+        <param-name> DB_URL </param-name>
+        <param-value> jdbc:sqlserver://localhost:1433;databaseName=login </param-value>
+    </context-param>
+    <welcome-file-list>
+        <welcome-file>ItemServlet</welcome-file>
+    </welcome-file-list>
+</web-app>
