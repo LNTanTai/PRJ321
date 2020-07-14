@@ -13,6 +13,9 @@
         <title>Register</title>
     </head>
     <body>
+        <h1>
+            Register
+        </h1>
         <form action="registerAction" method="POST">
             <c:set var="result" value="${requestScope.ERROR}" />
             Username <input type="text" name="txtUsername" value="${param.txtUsername}" /><br/>

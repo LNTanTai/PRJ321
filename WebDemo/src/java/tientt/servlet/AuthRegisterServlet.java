@@ -43,16 +43,21 @@ public class AuthRegisterServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         //get site map
         siteMap = (Map<String, String>) request.getServletContext().getAttribute("SITE_MAP");
+        
         //get request parameter
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
         String confirm = request.getParameter("txtConfirm");
         String classname = request.getParameter("txtClassName");
+        
         //because we use RequestDispatcher
         //so url need to be retrived directly from site map
         String url = siteMap.get("registerPage");
+        
+        //initialize error object
         LoginCreateNewError errors = new LoginCreateNewError();
         boolean foundErr = false;
+        
         try {
             //1. Check all user errors
             if (username.trim().length() <= 0) {
@@ -70,6 +75,7 @@ public class AuthRegisterServlet extends HttpServlet {
                 foundErr = true;
                 errors.setClassnameLengthError("Classname require not null");
             }
+            
             if (foundErr == true) {
                 request.setAttribute("ERROR", errors);
             } else {
