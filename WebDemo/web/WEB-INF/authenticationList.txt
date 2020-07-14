@@ -4,7 +4,3 @@ deleteAccountAction
 updateAccountAction
 logoutAction
 search.jsp
-cartCheckout
-checkoutPage
-checkout
-cartDeleteItem
