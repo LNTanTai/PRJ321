@@ -20,7 +20,7 @@
                 </option>
             </c:forEach>
         </select></br>
-        <input type="submit" value="Add to cart" name="btnLogin" />
+        <input type="submit" value="Add to cart"/>
         <a href="cartView">View your cart</a>
     </form>
     </c:if>

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -38,20 +40,19 @@ public class ContextListener implements ServletContextListener {
             }
             fr.close();
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(ContextListener.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(ContextListener.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (br != null) {
                     br.close();
                 }
-
                 if (fr != null) {
                     fr.close();
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
+                Logger.getLogger(ContextListener.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -74,9 +75,9 @@ public class ContextListener implements ServletContextListener {
             }
             fr.close();
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(ContextListener.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(ContextListener.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (br != null) {
@@ -87,7 +88,7 @@ public class ContextListener implements ServletContextListener {
                     fr.close();
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
+                Logger.getLogger(ContextListener.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -97,11 +98,11 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext contex = sce.getServletContext();
-        
+
         String path = sce.getServletContext().getRealPath("/WEB-INF/siteMap.txt");
         Map<String, String> siteMap = loadSiteMapFromFile(path);
         contex.setAttribute("SITE_MAP", siteMap);
-        
+
         path = sce.getServletContext().getRealPath("/WEB-INF/authenticationList.txt");
         List<String> authList = loadAuthenticationListFromFile(path);
         contex.setAttribute("AUTH_LIST", authList);

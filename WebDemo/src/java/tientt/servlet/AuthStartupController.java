@@ -54,7 +54,7 @@ public class AuthStartupController extends HttpServlet {
                         HttpSession session = request.getSession(true);
                         session.setAttribute("USER", dto);
                         break;
-                    }//end if result is true
+                    }//end if dto is not null
                 }//end for cookies
             }//end if cookies is not null
         } catch (SQLException ex) {

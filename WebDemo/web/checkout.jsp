@@ -62,7 +62,7 @@
             No items in your cart
         </c:if>
             <br/>
-        <a href="storeView">Continue shopping</a>
+        <a href="cartView">Change your cart</a>
         
     </body>
 </html>

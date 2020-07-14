@@ -49,7 +49,7 @@
                 </font>
                 <br/>
             </c:if>
-            <input type="submit" value="Register" name="btnLogin" />
+            <input type="submit" value="Register"/>
             <input type="reset" value="Reset" />
         </form>
     </body>

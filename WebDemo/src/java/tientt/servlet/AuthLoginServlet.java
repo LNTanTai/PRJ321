@@ -67,7 +67,7 @@ public class AuthLoginServlet extends HttpServlet {
         } finally {
             response.sendRedirect(url);
             //dont use to send cookie back to client
-            //RequestDispatcher rd = request.getRequestDispatcher(url); //dont 
+            //RequestDispatcher rd = request.getRequestDispatcher(url); 
             //rd.forward(request, response);
             out.close();
         }
