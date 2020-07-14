@@ -41,7 +41,7 @@ public class AccountSearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Cache-Control", "no-cache, no-store");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         //get site map
