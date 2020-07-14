@@ -114,8 +114,12 @@ public class AuthenticationFilter implements Filter {
             List<String> authList = (ArrayList<String>) request.getServletContext().getAttribute("AUTH_LIST");
             HttpSession session = httpRequest.getSession(false);
             //check resource authentication
-            if (authList.contains(resource) && session == null) {
-                ((HttpServletResponse) response).sendRedirect("login");
+            if (authList.contains(resource)) {
+                if (session == null || session.getAttribute("USER") == null) {
+                    ((HttpServletResponse) response).sendRedirect("login");
+                } else {
+                    chain.doFilter(request, response);
+                }
             } else {
                 chain.doFilter(request, response);
             }
