@@ -13,13 +13,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import tientt.login.LoginDAO;
+import tientt.login.LoginDTO;
 
 /**
  *
  * @author natton
  */
 public class AccountDeleteServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,7 +43,13 @@ public class AccountDeleteServlet extends HttpServlet {
             LoginDAO dao = new LoginDAO();
             boolean result = dao.deleteAccount(username);
             if (result == true) {//call search servlet again
-                url = "searchAction?txtSearch=" + searchValue;
+                HttpSession session = request.getSession(false);
+                LoginDTO currentUser = (LoginDTO) session.getAttribute("USER");
+                if (username.equals(currentUser.getUsername())) {
+                    url = "logoutAction";
+                } else {
+                    url = "searchAction?txtSearch=" + searchValue;
+                }//end else username equal current user's username
             }//end if result is true
         } catch (SQLException e) {
             log("AccountDeleteServlet _ SQL _ " + e.getMessage());
