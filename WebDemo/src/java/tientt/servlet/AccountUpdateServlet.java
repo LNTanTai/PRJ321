@@ -65,7 +65,7 @@ public class AccountUpdateServlet extends HttpServlet {
                 LoginDAO dao = new LoginDAO();
                 boolean result = dao.updateAccount(username, password, role);
                 if (result == false) {
-                    url = siteMap.get("error");
+                    url = siteMap.get("actionFailed");
                 }
             }//end else isError = false
         } catch (ClassNotFoundException ex) {

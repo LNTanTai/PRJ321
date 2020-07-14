@@ -35,7 +35,7 @@ public class AccountDeleteServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String username = request.getParameter("pk");
         String searchValue = request.getParameter("lastSearchValue");
-        String url = "error";
+        String url = "actionFailed";
         try {
             LoginDAO dao = new LoginDAO();
             boolean result = dao.deleteAccount(username);
