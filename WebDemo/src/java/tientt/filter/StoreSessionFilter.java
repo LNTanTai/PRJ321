@@ -9,12 +9,18 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Map;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import tientt.cart.CartObject;
 
 /**
  *
@@ -30,7 +36,7 @@ public class StoreSessionFilter implements Filter {
     private FilterConfig filterConfig = null;
     
     public StoreSessionFilter() {
-    }    
+    }
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
@@ -58,7 +64,7 @@ public class StoreSessionFilter implements Filter {
 	    log(buf.toString());
 	}
          */
-    }    
+    }
     
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
@@ -103,10 +109,28 @@ public class StoreSessionFilter implements Filter {
         }
         
         doBeforeProcessing(request, response);
-        
         Throwable problem = null;
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpRespone = (HttpServletResponse) response;
+        String uri = httpRequest.getRequestURI();
+        int index = uri.lastIndexOf("/");
+        String resource = uri.substring(index + 1);
         try {
-            chain.doFilter(request, response);
+            if (resource.equals("cartCheckout")) {
+                try {
+                    HttpSession session = httpRequest.getSession(false);
+                    CartObject cartObject = (CartObject) session.getAttribute("CART");
+                    Map<String, Integer> items = cartObject.getItems();
+                    if (items.size()>0){
+                        chain.doFilter(request, response);
+                    }
+                } catch (NullPointerException ex) {
+                    httpRespone.sendRedirect("login.html");
+                }
+            }else{
+                chain.doFilter(request, response);
+            }
+            
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
@@ -149,16 +173,16 @@ public class StoreSessionFilter implements Filter {
     /**
      * Destroy method for this filter
      */
-    public void destroy() {        
+    public void destroy() {
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {                
+            if (debug) {
                 log("StoreSessionFilter:Initializing filter");
             }
         }
@@ -179,18 +203,18 @@ public class StoreSessionFilter implements Filter {
     }
     
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);        
+        String stackTrace = getStackTrace(t);
         
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);                
+                PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
-                pw.print(stackTrace);                
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                pw.print(stackTrace);
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -223,7 +247,7 @@ public class StoreSessionFilter implements Filter {
     }
     
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);        
+        filterConfig.getServletContext().log(msg);
     }
     
 }
