@@ -27,7 +27,7 @@ import javax.servlet.ServletContextListener;
  */
 public class ContextListener implements ServletContextListener {
 
-    private List<String> loadAuthenticationListFromFile(String path) {
+    private List<String> loadListFromFile(String path) {
         FileReader fr = null;
         BufferedReader br = null;
         List<String> authList = new ArrayList<>();
@@ -104,9 +104,14 @@ public class ContextListener implements ServletContextListener {
         contex.setAttribute("SITE_MAP", siteMap);
 
         path = sce.getServletContext().getRealPath("/WEB-INF/authenticationList.txt");
-        List<String> authList = loadAuthenticationListFromFile(path);
+        List<String> authList = loadListFromFile(path);
         contex.setAttribute("AUTH_LIST", authList);
+        
+        path = sce.getServletContext().getRealPath("/WEB-INF/checkoutSession.txt");
+        List<String> checkoutSessionList = loadListFromFile(path);
+        contex.setAttribute("CHECKOUT_SESSION_LIST", checkoutSessionList);
 
+       
     }
 
     @Override
