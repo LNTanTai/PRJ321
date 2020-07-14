@@ -61,6 +61,7 @@ public class CheckoutViewServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
+        response.setHeader("Cache-Control", "no-cache, no-store");
         siteMap = (Map<String, String>) request.getServletContext().getAttribute("SITE_MAP");
         String url = siteMap.get("checkoutPage");
         try {
