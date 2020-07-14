@@ -18,6 +18,5 @@ cartView=CartViewServlet
 cartPage=cart.jsp
 cartDeleteItem=CartDeleteItemServlet
 cartCheckout=CartCheckoutServlet
-cartViewCheckout=CartViewCheckoutServlet
 checkoutPage=checkout.jsp
 checkout=checkout.html
