@@ -61,12 +61,16 @@
         <servlet-class>tientt.servlet.CartDeleteItemServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CartCheckoutServlet</servlet-name>
-        <servlet-class>tientt.servlet.CartCheckoutServlet</servlet-class>
+        <servlet-name>CheckoutViewServlet</servlet-name>
+        <servlet-class>tientt.servlet.CheckoutViewServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AuthRegisterServlet</servlet-name>
         <servlet-class>tientt.servlet.AuthRegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckoutActionServlet</servlet-name>
+        <servlet-class>tientt.servlet.CheckoutActionServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AuthLoginServlet</servlet-name>
@@ -109,12 +113,16 @@
         <url-pattern>/CartDeleteItemServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CartCheckoutServlet</servlet-name>
-        <url-pattern>/CartCheckoutServlet</url-pattern>
+        <servlet-name>CheckoutViewServlet</servlet-name>
+        <url-pattern>/CheckoutViewServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AuthRegisterServlet</servlet-name>
         <url-pattern>/AuthRegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutActionServlet</servlet-name>
+        <url-pattern>/CheckoutActionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

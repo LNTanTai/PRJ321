@@ -42,7 +42,7 @@
                     </c:forEach>
                     <tr>
                         <td colspan="3">
-                            <a href="checkout">Checkout</a>
+                            <a href="checkoutView">Checkout</a>
                         </td>
                         <td>
                             <input type="submit" value="Delete selected items" />
